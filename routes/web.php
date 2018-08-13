@@ -1,15 +1,19 @@
 <?php
-
-// Route::middleware(Admin::class)->group(function () {
-
 Route::auth();
 
-Route::get('/', 'HomePageController@index');
+Route::middleware('auth')->group(function () {
+    Route::get('/', 'HomePageController@index')->name('home');
 
-Route::get('/admin', 'AdminController@index');
+    Route::prefix('admin')->group(function () {
 
-Route::get('/admin/manage-prices', 'PricesController@index');
+        Route::get('/', 'AdminController@index')->name('admin');
+        Route::get('/manage-price', 'PriceController@index')->name('manage-price');
+        Route::get('/parking-space', 'ParkingSpaceController@index')->name('parking-space');
 
-Route::get('/admin/manage-parking-spaces', 'ParkingSpacesController@index');
+        Route::get('/parking-model', 'ParkingModelController@index')->name('parking-model');
+        Route::post('/parking-model', 'ParkingModelController@create')->name('parking-model-create');
 
-// });
+        Route::get('/manage-user', 'ManageUserController@index')->name('manage-user');
+
+    });
+});
