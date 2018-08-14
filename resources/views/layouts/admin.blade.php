@@ -46,6 +46,19 @@
             </div>
             <div id="page-content-wrapper">
                 <div class="container-fluid">
+                    @if (isset($errors) && $errors->count())
+                        <div class="alert alert-danger">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            <ul class="list-unstyled">
+                                @foreach ($errors->all() as $error)
+                                    <li>{!! $error !!}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+                </div>
+                @include('flash::message')
+                <div class="container-fluid">
                     @yield('content')
                 </div>
             </div>

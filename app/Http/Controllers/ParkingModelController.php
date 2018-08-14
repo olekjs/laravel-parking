@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ParkingModelRequest;
 use App\Models\ParkingModel;
 use Illuminate\Http\Request;
-use App\Http\Requests\ParkingModelRequest;
 
 class ParkingModelController extends Controller
 {
@@ -23,6 +23,18 @@ class ParkingModelController extends Controller
     {
         $data = $request->all();
 
-        ParkingModel::create($data);
+        if (ParkingModel::create($data)) {
+            return back()->withFlash('The parking model has been successfully created.', 'success', true);
+        }
+        return back()->withInput()->withFlash('Error creating parking model.', 'danger', true);
+    }
+
+    public function test(Request $request)
+    {
+        $data = collect($request->all());
+        
+        return response()->json([
+            'data' => $data,
+        ]);
     }
 }

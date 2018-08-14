@@ -15,5 +15,6 @@ Route::middleware('auth')->group(function () {
 
         Route::get('/manage-user', 'ManageUserController@index')->name('manage-user');
 
+        Route::post('test','ParkingModelController@test')->name('test');
     });
 });

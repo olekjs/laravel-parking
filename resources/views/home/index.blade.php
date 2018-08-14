@@ -6,7 +6,7 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-body">
-                    Car-park  
+                    <a href="{{ route('admin') }}" class="btn btn-primary">Admin panel</a>
                 </div>
             </div>
         </div>
