@@ -34,7 +34,7 @@
                         <a href="{{ route('manage-price') }}">Manage prices</a>
                     </li>
                     <li>
-                        <a href="{{ route('parking-model') }}">Add parking model</a>
+                        <a href="{{ route('parking-model') }}">Manage parking models</a>
                     </li>
                     <li>
                         <a href="{{ route('parking-space') }}">Manage parking spaces</a>

@@ -11,10 +11,12 @@ Route::middleware('auth')->group(function () {
         Route::get('/parking-space', 'ParkingSpaceController@index')->name('parking-space');
 
         Route::get('/parking-model', 'ParkingModelController@index')->name('parking-model');
+        Route::get('/parking-model-view', 'ParkingModelController@test')->name('parking-model-create-view');
         Route::post('/parking-model', 'ParkingModelController@create')->name('parking-model-create');
 
         Route::get('/manage-user', 'ManageUserController@index')->name('manage-user');
 
-        Route::post('test','ParkingModelController@test')->name('test');
+        Route::post('save-parking-level', 'ParkingModelController@getParkingLevel')->name('save-parking-level');
+
     });
 });

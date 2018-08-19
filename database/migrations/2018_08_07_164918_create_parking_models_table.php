@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateParkingModelsTable extends Migration
 {
@@ -15,17 +15,13 @@ class CreateParkingModelsTable extends Migration
     {
         Schema::create('parking_models', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('levels');
-            $table->string('space_one')->nullable();
-            $table->string('space_two')->nullable();
-            $table->string('space_third')->nullable();
-            $table->string('space_four')->nullable();
-            $table->string('space_five')->nullable();
-            $table->string('space_six')->nullable();
+            $table->string('level_id');
             $table->string('city');
             $table->integer('address_number');
             $table->string('phone');
             $table->string('email');
+            $table->integer('level_total');
+            $table->integer('spaces_total');
             $table->timestamps();
         });
     }

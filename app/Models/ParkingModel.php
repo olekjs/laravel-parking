@@ -7,16 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 class ParkingModel extends Model
 {
     protected $fillable = [
-        'levels',
-        'space_one',
-        'space_two',
-        'space_third',
-        'space_four',
-        'space_five',
-        'space_six',
+    	'level_id',
         'city',
         'address_number',
         'phone',
         'email',
+        'lavel_total',
+        'spaces_total'
     ];
 }
