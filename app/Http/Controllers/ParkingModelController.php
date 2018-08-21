@@ -23,7 +23,7 @@ class ParkingModelController extends Controller
     {
         $data             = $request->all();
         $data['level_id'] = $request->input('level_id');
-        dd($data);
+        // dd($data);
         if (ParkingModel::create($data)) {
             return back()->withFlash('The parking model has been successfully created.', 'success', true);
         }

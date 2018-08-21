@@ -12,7 +12,7 @@ class ParkingModel extends Model
         'address_number',
         'phone',
         'email',
-        'lavel_total',
+        'level_total',
         'spaces_total'
     ];
 }

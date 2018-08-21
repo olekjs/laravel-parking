@@ -18,9 +18,9 @@ jQuery(document).ready(function() {
         let totalLevels = 0;
         for (let i = 0; i < elementsLength; i++) {
             totalLevels = $('.level-properties')[i].attributes[3].value;
+
             let space = $('.level-properties')[i].value;
-            // console.log(space);
-            totalSpaces = +space + +space;
+            totalSpaces += parseInt(space);
         }
         $("input[name='level_total']").val(totalLevels);
         $("input[name='spaces_total']").val(totalSpaces);
