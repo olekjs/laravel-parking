@@ -1,6 +1,9 @@
 @extends('layouts.admin')
 
 @section('content')
-	@include('admin.parking_model.form');
+	{{ Form::model($model, ['route' => ['parking-model-edit']]) }}
+		@include('admin.parking_model.components.form');
+	{{ Form::submit('Create', ['class' => 'btn btn-success btn-block level-save']) }}
+	{{ Form::close() }}
 @endsection
-<script src="{{ mix('/js/create-model.js') }}"></script>
+<script src="{{ mix('/js/create-parking-model.js') }}"></script>

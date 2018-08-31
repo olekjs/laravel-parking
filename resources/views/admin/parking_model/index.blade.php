@@ -11,8 +11,7 @@
 	        <th>Levels</th>
 	        <th>Spaces</th>
 	        <th>Created at</th>
-	        <th></th>
-	        <th></th>
+	        <th class="text-right"></th>
 	    </tr>
 	</thead>
 	<tbody>
@@ -25,14 +24,15 @@
 	            <td>{{ $parking->level_total }}</td>
 	            <td>{{ $parking->spaces_total }}</td>
 	            <td>{{ $parking->created_at }}</td>
-	            <td>
-	                <a href="#" class="btn btn-secondary btn-sm" title="Edytuj">
-	                    <span class="glyphicon glyphicon-edit"></span>Edytuj
+	            <td class="text-right">
+	                <a href="{{ route('parking-model-show', $parking) }}" class="btn btn-secondary btn-sm" title="Edytuj">
+	                    <span class="glyphicon glyphicon-edit"></span> Show
 	                </a>
-	            </td>
-	            <td>
-	                <a href="#" class="btn btn-danger btn-sm" title="Usuń">
-	                    <span class="glyphicon glyphicon-edit"></span>Usuń
+	                <a href="{{ route('parking-model-edit-view', $parking) }}" class="btn btn-secondary btn-sm" title="Edytuj">
+	                    <span class="glyphicon glyphicon-edit"></span> Edit
+	                </a>
+	                <a href="{{ route('parking-model-destroy', $parking) }}" class="btn btn-danger btn-sm" title="Usuń">
+	                    <span class="glyphicon glyphicon-edit"></span> Delete
 	                </a>
 	            </td>
 	        </tr>

@@ -51,7 +51,7 @@
                             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                             <ul class="list-unstyled">
                                 @foreach ($errors->all() as $error)
-                                    <li>{!! $error !!}</li>
+                                    <li>{{ $error }}</li>
                                 @endforeach
                             </ul>
                         </div>

@@ -1,6 +1,5 @@
 <div class="row">
 	<div class="col-md-6 mx-left">
-	    {{ Form::open(array('route' => 'parking-model-create')) }}
 	    {{ Form::hidden('level_id', uniqid()) }}
 	    {{ Form::hidden('level_val', null) }}
 	    {{ Form::hidden('level_total', null) }}
@@ -44,6 +43,7 @@
 				<div class="col-md-12">
 					<div class="form-group required">
 						<div class="btn btn-primary btn-block level-add">Add parking level</div>
+						<div class='btn btn-danger btn-block level-delete'>Clear levels</div>
 					</div>
 				</div>
 				<div class="col-md-12">
@@ -52,7 +52,5 @@
 			</div>
 		</div>
 	</div>
-	{{ Form::submit('Create', ['class' => 'btn btn-success btn-block level-save']) }}
-	{{ Form::close() }}
 </div>
 

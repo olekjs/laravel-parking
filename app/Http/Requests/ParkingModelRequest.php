@@ -24,11 +24,18 @@ class ParkingModelRequest extends FormRequest
     public function rules()
     {
         return [
-            'city'           => 'required|string',
-            'address_number' => 'required|max:10000',
-            'phone'          => 'required|max:15',
+            'city'           => 'required|string|min:3|max:100',
+            'address_number' => 'required|min:1|max:1000',
+            'phone'          => 'required|numeric',
             'email'          => 'required|email',
-            'level_val'      => 'required',
+            'level_val'      => 'required|numeric',
+        ];
+    }
+
+    public function messages() 
+    {
+        return [
+            //
         ];
     }
 }

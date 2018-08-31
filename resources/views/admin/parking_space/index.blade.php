@@ -14,7 +14,7 @@
 	<tbody>
 		@foreach($spaces as $space)
 	        <tr>
-	            <td>{{ $space->model()->city }}</td>
+	            <td>{{ $space->city }}</td>
   	            <td>{{ $space->level }}</td>
 	            <td>{{ $space->spaces }}</td>
 	            <td>{{ $space->created_at }}</td>

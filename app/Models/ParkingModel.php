@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\ParkingSpace;
 
 class ParkingModel extends Model
 {
@@ -15,4 +16,9 @@ class ParkingModel extends Model
         'level_total',
         'spaces_total'
     ];
+
+    public function spaces()
+    {
+    	return ParkingSpace::where('level_id', $this->level_id)->get();
+    }
 }
