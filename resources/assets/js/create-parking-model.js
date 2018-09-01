@@ -1,6 +1,7 @@
 global.$ = global.jQuery = require('jquery');
 
 jQuery(document).ready(function() {
+
     class Model {
         constructor() {
             this.addLevelElement();
@@ -95,8 +96,9 @@ jQuery(document).ready(function() {
                     });
                 }
             });
-    }
+        }
 
     }
+
     new Model();
 });

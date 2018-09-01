@@ -28,19 +28,13 @@
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('home') }}">Back to main page</a>
-                    </li>
-                    <li>
-                        <a href="{{ route('manage-price') }}">Manage prices</a>
-                    </li>
-                    <li>
                         <a href="{{ route('parking-model') }}">Manage parking models</a>
                     </li>
                     <li>
-                        <a href="{{ route('parking-space') }}">Manage parking spaces</a>
+                        <a href="{{ route('customer.index') }}">Manage customers</a>
                     </li>
                     <li>
-                        <a href="{{ route('manage-user') }}">Manage users</a>
+                        <a href="{{ route('home') }}">Back to main page</a>
                     </li>
                 </ul>
             </div>

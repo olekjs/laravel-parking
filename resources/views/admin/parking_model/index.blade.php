@@ -25,7 +25,7 @@
 	            <td>{{ $parking->spaces_total }}</td>
 	            <td>{{ $parking->created_at }}</td>
 	            <td class="text-right">
-	                <a href="{{ route('parking-model-show', $parking) }}" class="btn btn-secondary btn-sm" title="Edytuj">
+	                <a href="{{ route('parking-model-show', $parking) }}" class="btn btn-info btn-sm" title="Edytuj">
 	                    <span class="glyphicon glyphicon-edit"></span> Show
 	                </a>
 	                <a href="{{ route('parking-model-edit-view', $parking) }}" class="btn btn-secondary btn-sm" title="Edytuj">

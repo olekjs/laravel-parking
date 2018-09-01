@@ -7,8 +7,6 @@ Route::middleware('auth')->group(function () {
     Route::prefix('admin')->group(function () {
 
         Route::get('/', 'AdminController@index')->name('admin');
-        Route::get('/manage-price', 'PriceController@index')->name('manage-price');
-        Route::get('/parking-space', 'ParkingSpaceController@index')->name('parking-space');
 
         Route::get('/parking-model', 'ParkingModelController@index')->name('parking-model');
 
@@ -25,5 +23,22 @@ Route::middleware('auth')->group(function () {
         Route::get('/manage-user', 'ManageUserController@index')->name('manage-user');
         Route::post('save-parking-level', 'ParkingModelController@getParkingLevel')->name('save-parking-level');
 
+        Route::group(['prefix' => 'customer', 'as' => 'customer.'], function () {
+            Route::get('', 'CustomerController@index')->name('index');
+            Route::get('/create', 'CustomerController@create')->name('create');
+            Route::post('/store', 'CustomerController@store')->name('store');
+            Route::get('/edit/{customer}', 'CustomerController@edit')->name('edit');
+            Route::post('/update/{customer}', 'CustomerController@update')->name('update');
+            Route::get('/destroy/{customer}', 'CustomerController@destroy')->name('destroy');
+        });
+
+        Route::get('parking-model/{model}/parkind-space/{space}/price', 'ParkingPriceController@index')->name('price.index');
+        Route::post('parking-model/{model}/parkind-space/{space}/price/store', 'ParkingPriceController@store')->name('price.store');
+
+        Route::get('parking-model/{model}/parkind-space/{space}/price/edit/{price}', 'ParkingPriceController@edit')->name('price.edit');
+        Route::post('parking-model/{model}/parkind-space/{space}/price/update/{price}', 'ParkingPriceController@update')->name('price.update');
+
+        Route::get('parking-model/{model}/parkind-space/{space}/reservation', 'ParkingReservationController@index')->name('reservation.index');
+        Route::post('parking-model/{model}/parkind-space/{space}/reservation/store', 'ParkingReservationController@store')->name('reservation.store');
     });
 });
