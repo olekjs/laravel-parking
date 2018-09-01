@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
 @section('content')
 <div class="container">
@@ -6,7 +6,6 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-body">
-                    <a href="{{ route('admin') }}" class="btn btn-primary">Admin panel</a>
                 </div>
             </div>
         </div>

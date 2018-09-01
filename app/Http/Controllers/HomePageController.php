@@ -12,7 +12,6 @@ class HomePageController extends Controller
 {
     public function index()
     {
-        // Mail::to(Auth::user())->send(new TestMail());
         return view('home.index');
     }
 }
