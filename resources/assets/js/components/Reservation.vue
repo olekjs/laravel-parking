@@ -6,7 +6,7 @@
 					<div class="col-md-3">
 						<label for="type">Select type:</label>
 						<select type="text" id="type" v-model="type" class="custom-select">
-							<option value="active">Active</option>
+							<option value="active" selected>Active</option>
 							<option value="inactive">Inactive</option>
 							<option value="deleted">Deleted</option>
 						</select>
@@ -25,7 +25,14 @@
 				</div>
 			</div>
 		</div>
-		<table class="table table-middle-aligned table-hover">
+		<div v-if="reservations.length === 0">
+			<div class="card">
+				<div class="card-body">
+					No results
+				</div>
+			</div>
+		</div>
+		<table v-else class="table table-middle-aligned table-hover">
 			<thead class="thead-dark">
 			    <tr>
 			        <th>Customer</th>
@@ -41,7 +48,7 @@
 			<tbody v-for="reservation in reservations">
 	    		<td>{{ reservation.customer.first_name + ' ' + reservation.customer.last_name }}</td>
 	    		<td>{{ reservation.from }}</td>
-	    		<td>{{ reservation.to }}</td>
+	    		<td>{{ reservation.to }} {{ getType(reservation.to) }}</td>
 	    		<td>{{ reservation.created_at }}</td>
 	    		<td>{{ reservation.payment_status }}</td>
 	    		<td>{{ reservation.customer.phone }}</td>
@@ -57,6 +64,9 @@
 	}
 </style>
 <script>
+Vue.use(require('vue-moment'));
+import moment from 'moment';
+
 export default {
     data: function() {
         return {
@@ -78,6 +88,15 @@ export default {
         }
     },
 	methods: {
+		getType: function(to) {
+			let now = moment(moment().format('YYYY-MM-DD'));
+
+			if(now.isBefore(to)) {
+				return '(active)';
+			} else {
+				return '(inactive)';
+			}
+		},
 		getReservations: function() {
 		axios.post('/admin/api/getReservations', {
 	        }).then((response) => {

@@ -90,7 +90,7 @@ class ParkingReservationController extends Controller
         return ParkingReservation::whereHas(
             'customer', function ($query) use ($data) {
                 $query->where('first_name', 'like', sprintf('%%%s%%', $data));
-            })->with('customer')->get();
+            })->withTrashed()->with('customer')->get();
     }
 
     public function searchReservationsByDate(Request $request)
@@ -100,6 +100,6 @@ class ParkingReservationController extends Controller
 
         return ParkingReservation::where('from', 'like', sprintf('%%%s%%', $data))
         ->orWhere('to', 'like', sprintf('%%%s%%', $data))
-        ->with('customer')->get();
+        ->withTrashed()->with('customer')->get();
     }
 }

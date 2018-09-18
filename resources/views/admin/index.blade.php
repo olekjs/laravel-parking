@@ -22,6 +22,3 @@
     </div>
 </div>
 @endsection
-@push('scripts')
-<script src="{{ mix('js/test.js') }}"></script>
-@endpush
