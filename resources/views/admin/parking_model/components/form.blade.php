@@ -34,6 +34,8 @@
 						</div>
 					</div>
 				</div>
+					    	{{ Form::submit('Create', ['class' => 'btn btn-success btn-block level-save']) }}
+
 	        </div>
 		</div>
 	</div>

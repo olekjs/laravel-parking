@@ -8,7 +8,7 @@
             <th>Phone</th>
             <th>Email</th>
             <th>City</th>
-            <th class="text-right"></th>
+            <th class="text-right"><a class="btn btn-primary btn-sm" href="{{ route('customer.create') }}">Add new customer</a></th>
         </tr>
     </thead>
     <tbody>
@@ -30,5 +30,4 @@
         @endforeach
     </tbody>
 </table>
-<a class="btn btn-primary btn-block" href="{{ route('customer.create') }}">Add new customer</a>
 @endsection

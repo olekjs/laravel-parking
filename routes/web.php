@@ -18,7 +18,7 @@ Route::middleware('auth')->group(function () {
 
         Route::get('/parking-model-show/{model}', 'ParkingModelController@show')->name('parking-model-show');
 
-        Route::get('/parking-model-destroy/{model}', 'ParkingModelController@destroy')->name('parking-model-destroy');
+        Route::delete('/parking-model-destroy/{model}', 'ParkingModelController@destroy')->name('parking-model-destroy');
 
         Route::get('/manage-user', 'ManageUserController@index')->name('manage-user');
         Route::post('save-parking-level', 'ParkingModelController@getParkingLevel')->name('save-parking-level');
@@ -38,7 +38,21 @@ Route::middleware('auth')->group(function () {
         Route::get('parking-model/{model}/parkind-space/{space}/price/edit/{price}', 'ParkingPriceController@edit')->name('price.edit');
         Route::post('parking-model/{model}/parkind-space/{space}/price/update/{price}', 'ParkingPriceController@update')->name('price.update');
 
-        Route::get('parking-model/{model}/parkind-space/{space}/reservation', 'ParkingReservationController@index')->name('reservation.index');
+        Route::get('parking-model/{model}/parkind-space/{space}/reservation', 'ParkingReservationController@create')->name('reservation.create');
         Route::post('parking-model/{model}/parkind-space/{space}/reservation/store', 'ParkingReservationController@store')->name('reservation.store');
+
+        Route::group(['prefix' => 'reservation', 'as' => 'reservation.'], function () {
+            Route::get('/reservations', 'ParkingReservationController@index')->name('index');
+            Route::get('/show/{reservation}', 'ParkingReservationController@show')->name('show');
+            Route::get('/edit/{reservation}', 'ParkingReservationController@edit')->name('edit');
+            Route::post('/update/{reservation}', 'ParkingReservationController@update')->name('update');
+            Route::delete('/destroy/{reservation}', 'ParkingReservationController@destroy')->name('destroy');
+        });
+
+        Route::group(['prefix' => 'api', 'as' => 'api.'], function () {
+            Route::post('getReservations', 'ParkingReservationController@getReservations');
+            Route::get('searchReservationsByCustomer', 'ParkingReservationController@searchReservationsByCustomer');
+            Route::get('searchReservationsByDate', 'ParkingReservationController@searchReservationsByDate');
+        });
     });
 });

@@ -2,8 +2,9 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Http\RedirectResponse;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -28,6 +29,23 @@ class RouteServiceProvider extends ServiceProvider
         parent::boot();
     }
 
+    public function register()
+    {
+        RedirectResponse::macro('withFlash', function ($message = null, $level = 'info', $important = false) {
+            if (!is_null($message)) {
+                $flash = app('flash');
+
+                $flash->message($message, $level);
+
+                if ($important) {
+                    $flash->important();
+                }
+            }
+
+            return $this;
+        });
+
+    }
     /**
      * Define the routes for the application.
      *
@@ -52,8 +70,8 @@ class RouteServiceProvider extends ServiceProvider
     protected function mapWebRoutes()
     {
         Route::middleware('web')
-             ->namespace($this->namespace)
-             ->group(base_path('routes/web.php'));
+            ->namespace($this->namespace)
+            ->group(base_path('routes/web.php'));
     }
 
     /**
@@ -66,8 +84,8 @@ class RouteServiceProvider extends ServiceProvider
     protected function mapApiRoutes()
     {
         Route::prefix('api')
-             ->middleware('api')
-             ->namespace($this->namespace)
-             ->group(base_path('routes/api.php'));
+            ->middleware('api')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/api.php'));
     }
 }

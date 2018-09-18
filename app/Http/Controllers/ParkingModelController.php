@@ -13,9 +13,8 @@ class ParkingModelController extends Controller
 
     public function index()
     {
-        $parkings = ParkingModel::all();
         return view('admin.parking_model.index', [
-            'parkings' => $parkings,
+            'parkings' => ParkingModel::all(),
         ]);
     }
 
