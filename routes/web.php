@@ -54,5 +54,9 @@ Route::middleware('auth')->group(function () {
             Route::get('searchReservationsByCustomer', 'ParkingReservationController@searchReservationsByCustomer');
             Route::get('searchReservationsByDate', 'ParkingReservationController@searchReservationsByDate');
         });
+
+        Route::group(['prefix' => 'activity_log', 'as' => 'activity_log.'], function () {
+            Route::get('', 'ActivityLogController@index')->name('index');
+        });
     });
 });

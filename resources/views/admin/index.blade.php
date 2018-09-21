@@ -6,9 +6,8 @@
         <div class="col-md-6">
             <div class="card">
                 <div class="card-body">
-                    <div id="app">
-                        <test></test>
-                    </div>
+                    <p>Active reservations: {{ $activeReservations }}</p>
+                    <p>Today's earnings: {{ $earnings }}</p>
                 </div>
             </div>
         </div>

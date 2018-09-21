@@ -91,11 +91,7 @@ export default {
 		getType: function(to) {
 			let now = moment(moment().format('YYYY-MM-DD'));
 
-			if(now.isBefore(to)) {
-				return '(active)';
-			} else {
-				return '(inactive)';
-			}
+			return now.isBefore(to) ? '(active)' : '(inactive)'; 
 		},
 		getReservations: function() {
 		axios.post('/admin/api/getReservations', {

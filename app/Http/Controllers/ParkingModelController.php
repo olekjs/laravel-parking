@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Classes\ActivityLog;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ParkingModelRequest;
 use App\Models\ParkingModel;
 use App\Models\ParkingSpace;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ParkingModelController extends Controller
 {
@@ -34,6 +36,7 @@ class ParkingModelController extends Controller
         $data['level_id'] = $request->input('level_id');
 
         if (ParkingModel::create($data)) {
+            $this->saveLog(Auth::id(), 'created a new parking model', 'admin');
             return redirect()->route('parking-model')->withFlash('The parking model has been successfully created.', 'success', true);
         }
         return back()->withInput()->withFlash('Error creating parking model.', 'danger', true);
@@ -76,6 +79,7 @@ class ParkingModelController extends Controller
         $deleted = $model->delete();
 
         if ($deleted) {
+            $this->saveLog(Auth::id(), 'removed parking model', 'admin');
             return back()->withFlash('The parking model has been successfully deleted.', 'success', true);
         }
     }
@@ -85,5 +89,11 @@ class ParkingModelController extends Controller
         return view('admin.parking_model.show', [
             'model' => $model,
         ]);
+    }
+
+    public function saveLog(int $editor_id, string $action, string $changed_by, array $old_changes = null, array $new_changes = null)
+    {
+        $activityLog = new ActivityLog();
+        $activityLog->createActionLog($editor_id, $action, $changed_by, $old_changes, $new_changes);
     }
 }

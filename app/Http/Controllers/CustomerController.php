@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Customer\CreateCustomerRequest;
 use App\Http\Requests\Customer\UpdateCustomerRequest;
 use App\Models\Customer;
+use App\Classes\ActivityLog;
+use Illuminate\Support\Facades\Auth;
 
 class CustomerController extends Controller
 {
@@ -32,7 +34,8 @@ class CustomerController extends Controller
             'city',
         ]);
 
-        if (Customer::create($data)) {
+        if ($created = Customer::create($data)) {
+            $this->saveLog(Auth::id(), 'created a new customer', 'admin');
             return redirect()->route('customer.index')->withFlash('Customer has been successfully created.', 'success', true);
         }
         return back()->withInput()->withFlash('Error creating customer.', 'danger', true);
@@ -47,6 +50,8 @@ class CustomerController extends Controller
 
     public function update(UpdateCustomerRequest $request, Customer $customer)
     {
+        $this->saveLog(Auth::id(), 'has updated the customer', 'admin', $request->all(), $customer->toArray());
+
         $updated = $customer->update(
             $request->only(['first_name', 'last_name', 'phone', 'email', 'city'])
         );
@@ -62,7 +67,14 @@ class CustomerController extends Controller
         $deleted = $customer->delete();
 
         if ($deleted) {
+            $this->saveLog(Auth::id(), 'removed customer', 'admin');
             return back()->withFlash('Customer has been successfully deleted.', 'success', true);
         }
+    }
+
+    public function saveLog(int $editor_id, string $action, string $changed_by, array $old_changes = null, array $new_changes = null)
+    {
+        $activityLog = new ActivityLog();
+        $activityLog->createActionLog($editor_id, $action, $changed_by, $old_changes, $new_changes);
     }
 }

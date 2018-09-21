@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Classes\ActivityLog;
 use App\Http\Requests\Reservation\CreateReservationRequest;
 use App\Http\Requests\Reservation\UpdateReservationRequest;
 use App\Models\Customer;
@@ -9,6 +10,7 @@ use App\Models\ParkingModel;
 use App\Models\ParkingReservation;
 use App\Models\ParkingSpace;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ParkingReservationController extends Controller
 {
@@ -24,6 +26,7 @@ class ParkingReservationController extends Controller
         $data['parking_space_id'] = $space->id;
 
         if (ParkingReservation::create($data)) {
+            $this->saveLog(Auth::id(), 'created a new reservation', 'admin');
             return redirect()->route('parking-model-show', $model)->withFlash('Reservation has been successfully set.', 'success', true);
         }
 
@@ -54,6 +57,7 @@ class ParkingReservationController extends Controller
         $deleted = $reservation->delete();
 
         if ($deleted) {
+            $this->saveLog(Auth::id(), 'removed reservation', 'admin');
             return back()->withFlash('Reservation has been successfully deleted.', 'success', true);
         }
     }
@@ -67,6 +71,8 @@ class ParkingReservationController extends Controller
 
     public function update(UpdateReservationRequest $request, ParkingReservation $reservation)
     {
+        $this->saveLog(Auth::id(), 'has updated the reservation', 'admin', $request->all(), $reservation->toArray());
+
         $updated = $reservation->update(
             $request->only(['customer_id', 'from', 'to'])
         );
@@ -99,7 +105,13 @@ class ParkingReservationController extends Controller
         $data = $request->input('date');
 
         return ParkingReservation::where('from', 'like', sprintf('%%%s%%', $data))
-        ->orWhere('to', 'like', sprintf('%%%s%%', $data))
-        ->withTrashed()->with('customer')->get();
+            ->orWhere('to', 'like', sprintf('%%%s%%', $data))
+            ->withTrashed()->with('customer')->get();
+    }
+
+    public function saveLog(int $editor_id, string $action, string $changed_by, array $old_changes = null, array $new_changes = null)
+    {
+        $activityLog = new ActivityLog();
+        $activityLog->createActionLog($editor_id, $action, $changed_by, $old_changes, $new_changes);
     }
 }

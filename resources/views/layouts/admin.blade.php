@@ -26,13 +26,13 @@
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('parking-model') }}">Manage parking models</a>
+                        <a href="{{ route('parking-model') }}">Parking models</a>
                     </li>
                     <li>
-                        <a href="{{ route('customer.index') }}">Manage customers</a>
+                        <a href="{{ route('customer.index') }}">Customers</a>
                     </li>
                     <li>
-                        <a href="{{ route('reservation.index') }}">Manage reservations</a>
+                        <a href="{{ route('reservation.index') }}">Reservations</a>
                     </li>
                     <li>
                         <a href="{{ route('home') }}">Back to main page</a>

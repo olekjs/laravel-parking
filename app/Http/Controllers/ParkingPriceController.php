@@ -6,6 +6,8 @@ use App\Models\ParkingModel;
 use App\Models\ParkingPrice;
 use App\Models\ParkingSpace;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Classes\ActivityLog;
 
 class ParkingPriceController extends Controller
 {
@@ -24,6 +26,7 @@ class ParkingPriceController extends Controller
         $data['parking_space_id'] = $space->id;
 
         if (ParkingPrice::create($data)) {
+            $this->saveLog(Auth::id(), 'set a new parking space price', 'admin');
             return redirect()->route('parking-model-show', $model)->withFlash('Price has been successfully set.', 'success', true);
         }
         return back()->withInput()->withFlash('Error setting price.', 'danger', true);
@@ -40,7 +43,9 @@ class ParkingPriceController extends Controller
 
     public function update(Request $request, ParkingModel $model, ParkingSpace $space, ParkingPrice $price)
     {
-       $updated = $price->update(
+        $this->saveLog(Auth::id(), 'has updated parking space price', 'admin', $request->all(), $price->toArray());
+
+        $updated = $price->update(
             $request->only(['price'])
         );
 
@@ -48,5 +53,11 @@ class ParkingPriceController extends Controller
             return redirect()->route('parking-model-show', $model)->withFlash('Price has been successfully set.', 'success', true);
         }
         return back()->withInput()->withFlash('Error setting price.', 'danger', true);
+    }
+
+    public function saveLog(int $editor_id, string $action, string $changed_by, array $old_changes = null, array $new_changes = null)
+    {
+        $activityLog = new ActivityLog();
+        $activityLog->createActionLog($editor_id, $action, $changed_by, $old_changes, $new_changes);
     }
 }
