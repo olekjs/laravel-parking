@@ -86,27 +86,7 @@ class ParkingReservationController extends Controller
 
     public function getReservations()
     {
-        return ParkingReservation::with('customer')->get();
-    }
-
-    public function searchReservationsByCustomer(Request $request)
-    {
-        $data = $request->input('customer');
-
-        return ParkingReservation::whereHas(
-            'customer', function ($query) use ($data) {
-                $query->where('first_name', 'like', sprintf('%%%s%%', $data));
-            })->withTrashed()->with('customer')->get();
-    }
-
-    public function searchReservationsByDate(Request $request)
-    {
-
-        $data = $request->input('date');
-
-        return ParkingReservation::where('from', 'like', sprintf('%%%s%%', $data))
-            ->orWhere('to', 'like', sprintf('%%%s%%', $data))
-            ->withTrashed()->with('customer')->get();
+        return ParkingReservation::with('customer')->withTrashed()->get();
     }
 
     public function saveLog(int $editor_id, string $action, string $changed_by, array $old_changes = null, array $new_changes = null)

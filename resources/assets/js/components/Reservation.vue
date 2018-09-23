@@ -6,7 +6,7 @@
 					<div class="col-md-3">
 						<label for="type">Select type:</label>
 						<select type="text" id="type" v-model="type" class="custom-select">
-							<option value="active" selected>Active</option>
+							<option value="active">Active</option>
 							<option value="inactive">Inactive</option>
 							<option value="deleted">Deleted</option>
 						</select>
@@ -85,6 +85,9 @@ export default {
         },
         date: function(date) {
         	this.searchReservationsByDate(date);
+        },
+        type: function(type) {
+        	this.searchReservationsByType(type);
         }
     },
 	methods: {
@@ -94,34 +97,34 @@ export default {
 			return now.isBefore(to) ? '(active)' : '(inactive)'; 
 		},
 		getReservations: function() {
-		axios.post('/admin/api/getReservations', {
-	        }).then((response) => {
-	        	this.reservations = response.data;
-	        }).catch(function (error) {
-	        	//
-	        });
+			this.customer = '';
+			this.date = '';
+			this.type = '';
+			axios.post('/admin/api/getReservations', {
+		        }).then((response) => {
+		        	this.reservations = response.data;
+		        }).catch(function (error) {
+		        	//
+		        });
 		},
 		searchReservationsByCustomer: function(customer) {
-		axios.get('/admin/api/searchReservationsByCustomer', {
-	            params: {
-	            	customer: customer,
-	            }
-	        }).then((response) => {
-	        	this.reservations = response.data;
-	        }).catch(function (error) {
-	        	//
-	        });
+			if(customer) {
+				let reservations = this.reservations;
+				 reservations.filter(function() {
+					reservations.forEach(function(element, index) {
+						return element.customer.first_name = customer;
+					});
+				});
+		    }
 		},
 		searchReservationsByDate: function(date) {
-		axios.get('/admin/api/searchReservationsByDate', {
-	            params: {
-	            	date: date
-	            }
-	        }).then((response) => {
-	        	this.reservations = response.data;
-	        }).catch(function (error) {
-	        	//
-	        });
+			if(date) {
+
+		    }
+		},
+		searchReservationsByType: function(type) {
+			if(type) {
+	    	}
 		},
 	}
 }

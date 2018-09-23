@@ -51,8 +51,6 @@ Route::middleware('auth')->group(function () {
 
         Route::group(['prefix' => 'api', 'as' => 'api.'], function () {
             Route::post('getReservations', 'ParkingReservationController@getReservations');
-            Route::get('searchReservationsByCustomer', 'ParkingReservationController@searchReservationsByCustomer');
-            Route::get('searchReservationsByDate', 'ParkingReservationController@searchReservationsByDate');
         });
 
         Route::group(['prefix' => 'activity_log', 'as' => 'activity_log.'], function () {

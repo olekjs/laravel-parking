@@ -20,15 +20,15 @@
 			@endphp
 		@for($i = 0; $i < count($changes); $i++)
 			<tr>
-				<td>{{ $log->action }}</td>
+				<td>{{ $log->full_name }} {{ $log->action }}</td>
 				<td>{{ $log->changed_by }}</td>
-				<td>{{ $changes[$i]['name'] }}</td>
+				<td>{{ str_replace('_', ' ', $changes[$i]['name']) }}</td>
 				<td>{{ $changes[$i]['old'] }}</td>
 				<td>{{ $changes[$i]['new'] }}</td>
 				<td>{{ $log->created_at }}</td>
 		@endfor
 		@if(empty($changes))
-			<td>{{ $log->action }}</td>
+			<td>{{ $log->full_name }} {{ $log->action }}</td>
 			<td>{{ $log->changed_by }}</td>
 			<td>-</td>
 			<td>-</td>
@@ -39,4 +39,5 @@
 		@endforeach
 	</tbody>
 </table>
+{{ $logs->render() }}
 @endsection
