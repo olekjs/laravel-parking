@@ -11,6 +11,7 @@
 
         <link rel="dns-prefetch" href="https://fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
 
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
         <link href="{{ asset('css/nav-bar.css') }}" rel="stylesheet">
@@ -33,6 +34,9 @@
                     </li>
                     <li>
                         <a href="{{ route('reservation.index') }}">Reservations</a>
+                    </li>
+                    <li>
+                        <a href="{{ route('activity_log.index') }}">Activity logs</a>
                     </li>
                     <li>
                         <a href="{{ route('home') }}">Back to main page</a>

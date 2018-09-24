@@ -110,11 +110,13 @@ export default {
 		searchReservationsByCustomer: function(customer) {
 			if(customer) {
 				let reservations = this.reservations;
-				 reservations.filter(function() {
-					reservations.forEach(function(element, index) {
-						return element.customer.first_name = customer;
-					});
+
+				let result = reservations.filter(function(index) {
+					if( (index.customer.first_name.indexOf(customer) == 0) || (index.customer.last_name) == 0) {
+						return index;
+					}
 				});
+				this.reservations = result;
 		    }
 		},
 		searchReservationsByDate: function(date) {

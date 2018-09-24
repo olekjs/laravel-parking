@@ -13,6 +13,7 @@ let mix = require('laravel-mix');
 
 mix.js('resources/assets/js/app.js', 'public/js')
    .js('resources/assets/js/create-parking-model.js', 'public/js')
+   .js('resources/assets/js/charts.js', 'public/js')
    .js('resources/assets/js/reservation.js', 'public/js');
 
    mix.sass('resources/assets/sass/app.scss', 'public/css')

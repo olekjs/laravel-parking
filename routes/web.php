@@ -42,7 +42,7 @@ Route::middleware('auth')->group(function () {
         Route::post('parking-model/{model}/parkind-space/{space}/reservation/store', 'ParkingReservationController@store')->name('reservation.store');
 
         Route::group(['prefix' => 'reservation', 'as' => 'reservation.'], function () {
-            Route::get('/reservations', 'ParkingReservationController@index')->name('index');
+            Route::get('', 'ParkingReservationController@index')->name('index');
             Route::get('/show/{reservation}', 'ParkingReservationController@show')->name('show');
             Route::get('/edit/{reservation}', 'ParkingReservationController@edit')->name('edit');
             Route::post('/update/{reservation}', 'ParkingReservationController@update')->name('update');

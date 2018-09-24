@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Classes\ActivityLog;
 use App\Http\Requests\Customer\CreateCustomerRequest;
 use App\Http\Requests\Customer\UpdateCustomerRequest;
 use App\Models\Customer;
-use App\Classes\ActivityLog;
 use Illuminate\Support\Facades\Auth;
 
 class CustomerController extends Controller
