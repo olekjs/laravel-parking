@@ -64,9 +64,9 @@ class AdminController extends Controller
         $today = Carbon::today();
 
         $reservations = [
-            'today'           => $this->reservationWhereQuery('to', '>', $today)->count(),
-            'yesterday'       => $this->reservationWhereQuery('to', '>', $today->subDay()->format('Y-m-d'))->count(),
-            'beforeYesterday' => $this->reservationWhereQuery('to', '>', $today->subDays(1)->format('Y-m-d'))->count(),
+            'today'           => ParkingReservation::whereDate('created_at', $today->format('Y-m-d'))->get()->count(),
+            'yesterday'       => ParkingReservation::whereDate('created_at', $today->subDay()->format('Y-m-d'))->get()->count(),
+            'beforeYesterday' => ParkingReservation::whereDate('created_at', $today->subDays(1)->format('Y-m-d'))->get()->count(),
 
         ];
 

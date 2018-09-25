@@ -4,16 +4,12 @@
 			<div class="card-body">
 				<div class="row">
 					<div class="col-md-3">
-						<label for="type">Select type:</label>
-						<select type="text" id="type" v-model="type" class="custom-select">
-							<option value="active">Active</option>
-							<option value="inactive">Inactive</option>
-							<option value="deleted">Deleted</option>
-						</select>
+						<label for="customerFirstName">Type customer first name:</label>
+						<input type="text" id="customerFirstName" v-model="customerFirstName" class="form-control">
 					</div>
 					<div class="col-md-3">
-						<label for="customer">Type customer:</label>
-						<input type="text" id="customer" v-model="customer" class="form-control">
+						<label for="customerLastName">Type customer last name:</label>
+						<input type="text" id="customerLastName" v-model="customerLastName" class="form-control">
 					</div>
 					<div class="col-md-3">
 						<label for="date">Type date:</label>
@@ -28,7 +24,7 @@
 		<div v-if="reservations.length === 0">
 			<div class="card">
 				<div class="card-body">
-					No results
+					No result
 				</div>
 			</div>
 		</div>
@@ -53,7 +49,7 @@
 	    		<td>{{ reservation.payment_status }}</td>
 	    		<td>{{ reservation.customer.phone }}</td>
 	    		<td>{{ reservation.customer.email }}</td>
-	    		<td><a :href="'/admin/reservation/show/' + reservation.id" class="btn btn-secondary"> Manage</a></td>
+	    		<td><a :href="'/admin/reservation/show/' + reservation.id" class="btn btn-secondary"> Show</a></td>
 			</tbody>
 		</table>
 	</div>
@@ -71,18 +67,23 @@ export default {
     data: function() {
         return {
 			reservations: [],
-			customer: '',
+			customerFirstName: '',
+			customerLastName: '',
 			date: '',
-			type: ''
+			type: '',
         }
 	},
 	mounted: function() {
         this.getReservations();
+        this.noResultInfo();
     },
     watch: {
-        customer: function(customer) {
-            this.searchReservationsByCustomer(customer);
+    	customerFirstName: function(customer) {
+            this.searchReservationsByCustomerFirstName(customer);
         },
+    	customerLastName: function(customer) {
+    		this.searchReservationsByCustomerLastName(customer);
+    	},
         date: function(date) {
         	this.searchReservationsByDate(date);
         },
@@ -97,9 +98,8 @@ export default {
 			return now.isBefore(to) ? '(active)' : '(inactive)'; 
 		},
 		getReservations: function() {
-			this.customer = '';
-			this.date = '';
-			this.type = '';
+			this.clearForm();
+
 			axios.post('/admin/api/getReservations', {
 		        }).then((response) => {
 		        	this.reservations = response.data;
@@ -107,27 +107,56 @@ export default {
 		        	//
 		        });
 		},
-		searchReservationsByCustomer: function(customer) {
+		searchReservationsByCustomerFirstName: function(customer) {
 			if(customer) {
 				let reservations = this.reservations;
 
-				let result = reservations.filter(function(index) {
-					if( (index.customer.first_name.indexOf(customer) == 0) || (index.customer.last_name) == 0) {
-						return index;
-					}
+				let result =  reservations.filter(function(index) {
+					return index.customer.first_name.indexOf(customer.trim()) > -1;
 				});
+
+				this.reservations = result;
+		    }
+		},
+		searchReservationsByCustomerLastName: function(customer) {
+			if(customer) {
+				let reservations = this.reservations;
+
+				let result =  reservations.filter(function(index) {
+					return index.customer.last_name.indexOf(customer.trim()) > -1;
+				});
+
 				this.reservations = result;
 		    }
 		},
 		searchReservationsByDate: function(date) {
 			if(date) {
+				let reservations = this.reservations;
 
+				let result =  reservations.filter(function(index) {
+					return index.from.indexOf(date) > -1 || index.to.indexOf(date) > -1;
+				});
+
+				this.reservations = result;
 		    }
 		},
 		searchReservationsByType: function(type) {
 			if(type) {
+				let reservations = this.reservations;
+
+				let result =  reservations.filter(function(index) {
+					return index.from.indexOf(type) > -1 || index.to.indexOf(type) > -1;
+				});
+
+				this.reservations = result;
 	    	}
 		},
-	}
+		clearForm: function() {
+			this.customerFirstName = '',
+			this.customerLastName  = '',
+			this.date              = '',
+			this.type              = ''
+		}
+	},
 }
 </script>

@@ -35,7 +35,7 @@
 	            <td class="list-inline text-right">
 	                <a href="{{ route('parking-model-show', $parking) }}" class="btn btn-info btn-sm list-inline-item" title="Manage"> Manage</a>
 	                <a href="{{ route('parking-model-edit-view', $parking) }}" class="btn btn-secondary btn-sm list-inline-item" title="Edit"> Edit</a>
-                    {{ Form::open(['route' => ['parking-model-destroy', $parking], 'method' => 'DELETE', 'class' => 'list-inline-item']) }}
+                    {{ Form::open(['route' => ['parking-model-destroy', $parking], 'method' => 'DELETE', 'class' => 'list-inline-item confirm', 'data-confirm' => 'Sure?']) }}
                     	<button type="submit" class="btn btn-default btn-sm" title="Delete"> Delete</button>
                 	{{ Form::close() }}
 	            </td>
