@@ -3,6 +3,8 @@
 <hr>
 git command <code>git clone https://github.com/olekjs/laravel-parking.git</code>
 <br>
+OR
+<br>
 zip package<a href="https://github.com/olekjs/laravel-parking/archive/master.zip"> download</a>
 <hr>
 <h3>Follow these instructions:</h3>
