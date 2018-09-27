@@ -2,5 +2,5 @@
 <h3>Installation</h3>
 <hr>
 <code>git clone https://github.com/olekjs/laravel-parking.git</code>
-OR
+<p>OR</p>
 <code>Download </code>
