@@ -7,8 +7,8 @@ zip package<a href="https://github.com/olekjs/laravel-parking/archive/master.zip
 <hr>
 <h3>Next step:</h3>
 <ul>
-  <code>composer install</code>
-  <code>php artisan migrate</code>
-  <code>php artisan db:seed --class=UsersTableSeeder</code>
-  <code>php artisan db:seed --class=CustomersTableSeeder</code>
+  <code>composer install</code><br>
+  <code>php artisan migrate</code><br>
+  <code>php artisan db:seed --class=UsersTableSeeder</code><br>
+  <code>php artisan db:seed --class=CustomersTableSeeder</code><br>
 </ul>
