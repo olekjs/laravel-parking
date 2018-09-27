@@ -14,3 +14,7 @@ zip package<a href="https://github.com/olekjs/laravel-parking/archive/master.zip
   <p><code>php artisan db:seed --class=UsersTableSeeder</code></p>
   <p><code>php artisan db:seed --class=CustomersTableSeeder</code></p>
 </ul>
+<hr>
+<h3>Admin account:</h3>
+<strong>Login: </strong><code>admin@admin.com</code><br>
+<strong>Password: </strong><code>testtest</code>
