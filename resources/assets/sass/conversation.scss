@@ -1,0 +1,53 @@
+
+.scrollable {
+    height: 500px;
+    overflow-y: scroll;
+}
+
+.cloud-green {
+    padding-left: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    width: 51%;
+    min-height: 50px;
+    position: relative;
+    background: #ade49a;
+    border-radius: .4em;
+}
+
+.cloud-green:after {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    width: 0;
+    height: 0;
+    border: 46px solid transparent;
+    border-left-color: #ade49a;
+    border-right: 0;
+    margin-top: -46px;
+    margin-right: -46px;
+}
+
+.cloud-blue {
+    padding-left: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    width: 51%;
+    min-height: 50px;
+    position: relative;
+    background: #84cefb;
+    border-radius: .4em;
+}
+
+.cloud-blue:after {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 0;
+    height: 0;
+    border: 46px solid transparent;
+    border-right-color: #84cefb;
+    border-left: 0;
+    margin-top: -46px;
+    margin-left: -46px;
+}

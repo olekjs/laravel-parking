@@ -56,5 +56,22 @@ Route::middleware('auth')->group(function () {
         Route::group(['prefix' => 'activity_log', 'as' => 'activity_log.'], function () {
             Route::get('', 'ActivityLogController@index')->name('index');
         });
+
+        Route::namespace ('Support')->group(function () {
+            Route::group(['prefix' => 'chat', 'as' => 'chat.'], function () {
+                Route::get('', 'ChatController@index')->name('index');
+            });
+            Route::group(['prefix' => 'conversation', 'as' => 'conversation.'], function () {
+                Route::get('/{conversation}', 'ConversationController@index')->name('index');
+                Route::post('/send/{conversation}', 'ConversationController@send')->name('send');
+            });
+        });
     });
+});
+Route::namespace ('Support')->group(function () {
+    Route::get('support', 'GuestSupportController@index')->name('support');
+    Route::get('support/create', 'GuestSupportController@create')->name('support.conversation');
+    Route::post('', 'GuestSupportController@store')->name('support.store');
+    Route::get('support/ticket/{conversation_id}/guest/{email}', 'GuestSupportController@show')->name('support.show');
+    Route::post('/{conversation_id}', 'GuestSupportController@send')->name('support.send');
 });

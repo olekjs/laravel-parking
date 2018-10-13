@@ -15,7 +15,7 @@
 
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
         <link href="{{ asset('css/nav-bar.css') }}" rel="stylesheet">
-        <link href="{{ asset('css/create-parking-model.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/conversation.css') }}" rel="stylesheet">
     </head>
     <body>
         <div id="wrapper">
@@ -34,6 +34,9 @@
                     </li>
                     <li>
                         <a href="{{ route('reservation.index') }}">Reservations</a>
+                    </li>
+                    <li>
+                        <a href="{{ route('chat.index') }}">Support chat</a>
                     </li>
                     <li>
                         <a href="{{ route('activity_log.index') }}">Activity logs</a>
