@@ -36,13 +36,13 @@
                         <a href="{{ route('reservation.index') }}">Reservations</a>
                     </li>
                     <li>
-                        <a href="{{ route('chat.index') }}">Support chat</a>
+                        <a href="{{ route('support.index') }}">Support</a>
                     </li>
                     <li>
                         <a href="{{ route('activity_log.index') }}">Activity logs</a>
                     </li>
                     <li>
-                        <a href="{{ route('home') }}">Back to main page</a>
+                        <a href="{{ route('home') }}">Return to main page</a>
                     </li>
                 </ul>
             </div>

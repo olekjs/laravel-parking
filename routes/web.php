@@ -58,6 +58,7 @@ Route::middleware('auth')->group(function () {
         });
 
         Route::namespace ('Support')->group(function () {
+            Route::get('support', 'SupportController@index')->name('support.index');
             Route::group(['prefix' => 'chat', 'as' => 'chat.'], function () {
                 Route::get('', 'ChatController@index')->name('index');
             });

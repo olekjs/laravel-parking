@@ -6,7 +6,12 @@
 		<div class="col-md-4">
 			<div class="card">
 				<div class="card-body">
-					asd
+					<div class="row">
+						<a href="{{ route('chat.index') }}" class="btn btn-info btn-block">Return</a>
+					</div>
+					<div class="row mt-3">
+						<a href="{{ route('chat.index') }}" class="btn btn-info btn-block">Close Ticket</a>
+					</div>
 				</div>
 			</div>
 		</div>
